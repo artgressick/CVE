@@ -31,6 +31,7 @@ def main():
         if item['impact'] != {}:
           temp_data = {}
           temp_data['cve'] = str(item['cve']['CVE_data_meta']['ID'])
+          temp_data['description'] = str(item['cve']['description']['description_data'][0]['value'])
           temp_data['product'] = str(item['configurations']['nodes'])
 
           if 'baseMetricV3' in item['impact']:
@@ -39,30 +40,10 @@ def main():
               temp_data['score'] = item['impact']['baseMetricV2']['cvssV2']['baseScore']
 
 #Add in Platforms
-          temp_data['platform'] = 'not_switch'
-#Add in Switches
-          temp_data['ios'] = 'no'
-          temp_data['nx_os'] = 'no'
-          temp_data['ios_xe'] = 'no'
-          temp_data['ios_xr'] = 'no'
-          temp_data['junos'] = 'no'
-          temp_data['arista'] = 'no'
-          temp_data['aruba'] = 'no'
-#Add in NAC
-          temp_data['cisco_ise'] = 'no'
-          temp_data['forescout'] = 'no'
-          temp_data['clearpass'] = 'no'
-          temp_data['fortinac'] = 'no'
-#Add in Firewalls
-          temp_data['cisco_fw'] = 'no'
-          temp_data['palo_alto'] = 'no'
-          temp_data['fortinet'] = 'no'
-          temp_data['checkpoint'] = 'no'
-#Add in Wireless
-          temp_data['arista_wifi'] = 'no'
-          temp_data['aruba_wifi'] = 'no'
-          temp_data['cisco_wifi'] = 'no'
-          temp_data['extreme_wifi'] = 'no'
+          temp_data['vendor'] = []
+          temp_data['application'] = []
+          temp_data['os'] = []
+          temp_data['hardware'] = [] 
 
           counter = counter + 1
           collection.insert_one(temp_data)
