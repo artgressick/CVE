@@ -162,6 +162,51 @@ def main():
     print("Records Matched:", updateResult.matched_count );
     print("Records Modified:", updateResult.modified_count );
 
+# ---------------- SD-WAN ------------------------
+# Update Cisco SD-WAN (viptela)
+    updateResult = collection.update_many({ "$or": [{'product': {'$regex':':cisco:vedge'}}, {'product': {'$regex':':cisco:sd-wan'}} ]}, {"$push": {'vendor':'[cisco]', 'application':'[cisco_sdwan]'}} )
+    print("\nUpdating Cisco SD-WAN/Viptela");
+    print("Records Matched:", updateResult.matched_count );
+    print("Records Modified:", updateResult.modified_count );
+
+# Update VMware SD-WAN (velocloud)
+    updateResult = collection.update_many({ "$or": [{'product': {'$regex':':vmware:velocloud'}}, {'product': {'$regex':':vmware:sd-wan'}} ]}, {"$push": {'vendor':'[vmware]', 'application':'[vmware_sdwan]'}} )
+    print("\nUpdating VMware SD-WAN/Velocloud");
+    print("Records Matched:", updateResult.matched_count );
+    print("Records Modified:", updateResult.modified_count );
+
+# Update HPE / Silver Peak SD-WAN (edgeconnect)
+    updateResult = collection.update_many({ "$or": [{'product': {'$regex':':silver-peak:ecos'}}, {'product': {'$regex':':silver-peak:unity'}} ]}, {"$push": {'vendor':'[silverpeak]', 'application':'[silverpeak_sdwan]'}} )
+    print("\nUpdating Silver Peak SD-WAN/EdgeConnect");
+    print("Records Matched:", updateResult.matched_count );
+    print("Records Modified:", updateResult.modified_count );
+
+# Update PaloAlto SD-WAN (CloudGenix)
+    updateResult = collection.update_many({'product': {'$regex':':paloaltonetworks:prisma'}}, {"$push": {'vendor':'[palo_alto]', 'application':'[palo_sdwan]'}} )
+    print("\nUpdating PaloAlto Prisma/Cloudgenix");
+    print("Records Matched:", updateResult.matched_count );
+    print("Records Modified:", updateResult.modified_count );
+
+# Update Citrix SD-WAN
+    updateResult = collection.update_many({'product': {'$regex':':citrix:netscaler_sd-wan'}}, {"$push": {'vendor':'[citrix]', 'application':'[citrix_sdwan]'}} )
+    print("\nUpdating Citrix SDWAN");
+    print("Records Matched:", updateResult.matched_count );
+    print("Records Modified:", updateResult.modified_count );
+    
+# ---------------- Meeting Software  ------------------------
+# Update Cisco WebEx
+    updateResult = collection.update_many({'product': {'$regex':':cisco:webex'}}, {"$push": {'vendor':'[cisco]', 'application':'[webex]'}} )
+    print("\nUpdating Cisco Webex");
+    print("Records Matched:", updateResult.matched_count );
+    print("Records Modified:", updateResult.modified_count );
+
+# Update Zoom 
+    updateResult = collection.update_many({'product': {'$regex':':zoom:zoom'}}, {"$push": {'vendor':'[zoom]', 'application':'[zoom]'}} )
+    print("\nUpdating Zoom");
+    print("Records Matched:", updateResult.matched_count );
+    print("Records Modified:", updateResult.modified_count );
+
+    
 # Meraki products should go here
 
 if __name__ == '__main__':
